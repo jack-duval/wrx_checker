@@ -1,0 +1,7 @@
+CREATE TABLE faults (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    type TEXT NOT NULL,
+    timestamp REAL NOT NULL,
+    severity INTEGER,
+    proto_data BLOB NOT NULL
+);

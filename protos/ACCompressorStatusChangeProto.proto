@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+message ACCompressorStatusChangeProto {
+  int32 event_type = 1;
+  double timestamp = 2;
+  bool compressor_status = 3;
+  bool prev_compressor_status = 4;
+}
