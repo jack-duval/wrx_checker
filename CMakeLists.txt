@@ -42,6 +42,14 @@ add_executable(wrx_checker src/main.cpp
         src/events/ACCompressorStatusChange.h
         src/DBManager.cpp
         src/DBManager.h
+        src/FaultReporter.cpp
+        src/FaultReporter.h
+        src/events/EventContext.cpp
+        src/events/EventContext.h
+        src/events/ACCompressorStatusChange.cpp
+        src/CSVParser.cpp
+        src/CSVParser.h
+        src/RowContext.h
 )
 
 # Link the generated protobuf library and SQLite to your executable

@@ -6,6 +6,7 @@
 
 #include "Event.h"
 #include "ACCompressorStatusChangeProto.pb.h"
+#include "EventContext.h"
 
 namespace wrx_checker {
 
@@ -35,6 +36,8 @@ class ACCompressorStatusChange : public Event {
       proto.timestamp(), proto.compressor_status()
     );
   }
+
+  void check(EventContext& context);
 
  protected:
   bool m_compressor_status;
