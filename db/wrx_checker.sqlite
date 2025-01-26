@@ -1,3 +1,10 @@
+CREATE TABLE events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    type TEXT NOT NULL,
+    timestamp REAL NOT NULL,
+    proto_data BLOB NOT NULL
+);
+
 CREATE TABLE faults (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     type TEXT NOT NULL,

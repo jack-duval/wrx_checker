@@ -1,11 +1,10 @@
 #include <iostream>
-#include <sqlite3.h>
+#include "DBManager.h"
 
 int main() {
-  sqlite3* db = nullptr;
-
-
-
-  std::cout << "Hello, World!" << std::endl;
+  wrx_checker::DBManager db_manager("db/wrx_checker.sqlite");
+//  db_manager.clear_table("events");
+//  db_manager.clear_table("faults");
+  db_manager.execute_query("SELECT * FROM events");
   return 0;
 }
