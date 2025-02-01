@@ -13,7 +13,7 @@ class FaultReporter {
 
   void report_fault();
 
- protected:
+ private:
   DBManager& m_db_manager;
 
 };

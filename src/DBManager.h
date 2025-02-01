@@ -24,8 +24,12 @@ class DBManager {
   void clear_table(const std::string& table_name);
   void execute_query(const std::string& query);
 
+  void open();
+  void close();
+
  private:
-  sqlite3* db;
+  sqlite3* m_db;
+  std::string m_name;
   void get_columns(const std::string& table, std::vector<std::string>& columns);
 };
 

@@ -25,7 +25,6 @@ bool CSVParser::load() {
     if (!l.empty()) {
       m_data.emplace_back(parse_line(l));
     }
-    counter++;
   }
   return true;
 }

@@ -50,6 +50,8 @@ add_executable(wrx_checker src/main.cpp
         src/CSVParser.cpp
         src/CSVParser.h
         src/RowContext.h
+        src/ConfigParser.cpp
+        src/ConfigParser.h
 )
 
 # Link the generated protobuf library and SQLite to your executable

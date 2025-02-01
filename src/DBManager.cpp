@@ -5,20 +5,34 @@
 #include "DBManager.h"
 namespace wrx_checker {
 
-DBManager::DBManager(const std::string &name) {
-  int response = sqlite3_open(name.c_str(), &db);
-  if (response) {
-    std::cerr << "Cannot open sqlite database: " << sqlite3_errmsg(db) << std::endl;
-  } else {
-    std::cout << "Successfully opened DB" << std::endl;
+DBManager::DBManager(const std::string &name) : m_name(name) {}
+
+DBManager::~DBManager() {
+  if (m_db) {
+    sqlite3_close(m_db);
+    std::cout << "Closed database" << std::endl;
   }
 }
 
-DBManager::~DBManager() {
-  if (db) {
-    sqlite3_close(db);
-    std::cout << "Closed database" << std::endl;
+void DBManager::open() {
+  if (m_db) {
+    return;
+  } else {
+    int response = sqlite3_open(m_name.c_str(), &m_db);
+    if (response) {
+      std::cerr << "Cannot open sqlite m_db: " << sqlite3_errmsg(m_db) << std::endl;
+    } else {
+      std::cout << "Successfully Opened DB" << std::endl;
+    }
   }
+}
+
+void DBManager::close() {
+  if (m_db) {
+    sqlite3_close(m_db);
+  }
+
+  return;
 }
 
 void DBManager::clear_table(const std::string &table_name) {
@@ -41,7 +55,7 @@ void DBManager::clear_table(const std::string &table_name) {
 
 void DBManager::execute_query(const std::string &query) {
   char* err = nullptr;
-  int result = sqlite3_exec(db, query.c_str(), nullptr, nullptr, &err);
+  int result = sqlite3_exec(m_db, query.c_str(), nullptr, nullptr, &err);
   if (result != SQLITE_OK) {
     std::cerr << "SQL ERROR: " << err << std::endl;
   } else {
@@ -55,10 +69,10 @@ void DBManager::get_columns(const std::string &table,
   query << "PRAGMA table_info(" << table << ");";
 
   sqlite3_stmt* stmt;
-  int response = sqlite3_prepare_v2(db, query.str().c_str(), -1, &stmt, 0);
+  int response = sqlite3_prepare_v2(m_db, query.str().c_str(), -1, &stmt, 0);
 
   if (response != SQLITE_OK) {
-    std::cerr << "Failed to fetch columns for table: " << table << ": " << sqlite3_errmsg(db) << std::endl;
+    std::cerr << "Failed to fetch columns for table: " << table << ": " << sqlite3_errmsg(m_db) << std::endl;
     return;
   }
 
