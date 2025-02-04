@@ -7,6 +7,8 @@
 #include <memory>
 
 #include "EventTypes.h"
+#include "../Context.h"
+
 namespace wrx_checker {
 
 class Event {
@@ -16,11 +18,14 @@ class Event {
 
   virtual ~Event() = default;
 
-  EventTypes getType() const { return m_type; }
+  std::string getType() const { return kEventTypeNames[m_type]; }
   double getTime() const { return m_time; }
 
-  virtual std::string serializeToProto() const = 0;
+  virtual void check(EventContext& context) = 0;
 
+  void report();
+
+  virtual std::string serializeToProto() const = 0;
   std::unique_ptr<Event> deserializeFromProto(const std::string &proto_data);
 
  protected:

@@ -8,6 +8,8 @@
 #include <variant>
 #include <string>
 #include <iostream>
+#include <memory>
+#include <optional>
 #include <unordered_map>
 
 namespace wrx_checker {
@@ -85,15 +87,15 @@ struct RowContext {
 };
 
 struct EventContext {
-  RowContext& prev;
-  RowContext& curr;
+  std::unique_ptr<RowContext> prev;
+  std::unique_ptr<RowContext> curr;
+
 };
 
 struct FaultContext {
-  RowContext& prev;
-  RowContext& curr;
-  RowContext& next;
+  std::unique_ptr<RowContext> prev;
+  std::unique_ptr<RowContext> curr;
+  std::unique_ptr<RowContext> next;
 };
-
 
 } // namespace wrx_checker

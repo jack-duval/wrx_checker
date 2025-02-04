@@ -5,8 +5,17 @@
 
 namespace wrx_checker {
 
-void ACCompressorStatusChange::check(EventContext &context) {
+void ACCompressorStatusChange::check(EventContext& context) {
+  if (context.prev == nullptr) {
+    return;
+  }
 
+  if (context.prev->ACCompressorOn != context.curr->ACCompressorOn) {
+    // Report fault;
+    return;
+  } else {
+    return;
+  }
 }
 
 } // namespace wrx_checker

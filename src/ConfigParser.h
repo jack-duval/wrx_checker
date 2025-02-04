@@ -17,8 +17,7 @@ class ConfigParser {
 
   // in case we want to load other cfg files later?
   explicit ConfigParser(const std::string& path) : m_path(path) {
-    bool load_result = load();
-    if (load_result) {
+    if (bool load_result = load()) {
       return;
     } else {
       std::cerr << "Could not load cfg" << std::endl;

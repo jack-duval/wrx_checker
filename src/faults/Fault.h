@@ -18,6 +18,8 @@ class Fault : public Event {
     m_severity = severity;
   }
 
+  std::string getSeverity() { return kSeverityNames[m_severity]; }
+
   virtual ~Fault() = default;
 
  protected:

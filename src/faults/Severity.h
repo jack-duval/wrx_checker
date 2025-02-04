@@ -8,3 +8,9 @@ enum class Severity {
   MEDIUM,
   HIGH
 };
+
+static std::unordered_map<Severity, std::string> kSeverityNames = {
+  {Severity::LOW, "Low"},
+  {Severity::MEDIUM, "Medium"},
+  {Severity::HIGH, "High"},
+};

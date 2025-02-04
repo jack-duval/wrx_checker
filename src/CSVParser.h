@@ -9,8 +9,7 @@
 #include <fstream>
 #include <string_view>
 #include <iostream>
-
-#include "RowContext.h"
+#include "Context.h"
 
 namespace wrx_checker {
 
@@ -20,7 +19,7 @@ class CSVPreProcessor {
 
 class CSVParser {
  public:
-  explicit CSVParser(const char delim = ',', const std::string& path = "/Users/jack/Desktop/Development/wrx_checker/data/datalog1.csv")
+  explicit CSVParser(const char delim = ',', const std::string& path = "data/datalog1.csv")
     : m_delimiter(delim), m_path(path) {}
 
   bool load();

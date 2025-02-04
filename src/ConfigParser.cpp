@@ -7,7 +7,7 @@
 namespace wrx_checker {
 
 ConfigParser::ConfigParser() {
-  m_path = "/Users/jack/Desktop/Development/wrx_checker/src/project.cfg";
+  m_path = "src/project.cfg";
   bool load_result = load();
   if (load_result) {
     return;

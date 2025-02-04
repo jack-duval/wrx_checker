@@ -44,12 +44,9 @@ add_executable(wrx_checker src/main.cpp
         src/DBManager.h
         src/FaultReporter.cpp
         src/FaultReporter.h
-        src/events/EventContext.cpp
-        src/events/EventContext.h
         src/events/ACCompressorStatusChange.cpp
         src/CSVParser.cpp
         src/CSVParser.h
-        src/RowContext.h
         src/ConfigParser.cpp
         src/ConfigParser.h
         src/Context.h

@@ -19,14 +19,14 @@ class DBManager {
   explicit DBManager(const std::string& name = "");
   ~DBManager();
 
-  void add_fault(Event& event);
-  void add_event(Fault& fault);
+  void add_event(const Event& event);
+  void add_fault(Fault& fault);
 
   void clear_table(const std::string& table_name);
   void execute_query(const std::string& query);
 
   void open();
-  void close();
+  void close() const;
 
  private:
   sqlite3* m_db;
