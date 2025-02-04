@@ -10,12 +10,13 @@
 #include <sqlite3.h>
 #include "events/Event.h"
 #include "faults/Fault.h"
+#include "ConfigParser.h"
 
 namespace wrx_checker {
 
 class DBManager {
  public:
-  explicit DBManager(const std::string& name);
+  explicit DBManager(const std::string& name = "");
   ~DBManager();
 
   void add_fault(Event& event);
@@ -30,6 +31,7 @@ class DBManager {
  private:
   sqlite3* m_db;
   std::string m_name;
+  std::unique_ptr<ConfigParser> m_cfg = nullptr; // init to nullptr
   void get_columns(const std::string& table, std::vector<std::string>& columns);
 };
 

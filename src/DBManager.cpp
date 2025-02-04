@@ -5,7 +5,18 @@
 #include "DBManager.h"
 namespace wrx_checker {
 
-DBManager::DBManager(const std::string &name) : m_name(name) {}
+DBManager::DBManager(const std::string &name) {
+  std::cout << "Using name: " << name << std::endl;
+
+  if (name == "") {
+    std::cout << "Using default name and config parser" << std::endl;
+    m_cfg = std::make_unique<ConfigParser>();
+    m_name = m_cfg->get_val("db_path");
+    std::cout << m_name << std::endl;
+  }
+
+
+}
 
 DBManager::~DBManager() {
   if (m_db) {
@@ -54,6 +65,7 @@ void DBManager::clear_table(const std::string &table_name) {
 }
 
 void DBManager::execute_query(const std::string &query) {
+  open();
   char* err = nullptr;
   int result = sqlite3_exec(m_db, query.c_str(), nullptr, nullptr, &err);
   if (result != SQLITE_OK) {
@@ -61,6 +73,7 @@ void DBManager::execute_query(const std::string &query) {
   } else {
     std::cout << "Query executed: " << query << std::endl;
   }
+  close();
 }
 
 void DBManager::get_columns(const std::string &table,

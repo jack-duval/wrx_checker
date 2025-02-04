@@ -10,6 +10,8 @@
 #include <string_view>
 #include <iostream>
 
+#include "RowContext.h"
+
 namespace wrx_checker {
 
 class CSVPreProcessor {
@@ -18,11 +20,11 @@ class CSVPreProcessor {
 
 class CSVParser {
  public:
-  explicit CSVParser(const std::string& delim = ",", const std::string& path = "/Users/jack/Desktop/Development/wrx_checker/data/datalog1.csv")
+  explicit CSVParser(const char delim = ',', const std::string& path = "/Users/jack/Desktop/Development/wrx_checker/data/datalog1.csv")
     : m_delimiter(delim), m_path(path) {}
 
   bool load();
-  [[nodiscard]] const std::vector<std::vector<std::string>>& get_data() const {
+  const std::vector<RowContext>& get_data() const {
     return m_data;
   }
 
@@ -31,13 +33,13 @@ class CSVParser {
 
 
  protected:
-  std::vector<std::vector<std::string>> m_data;
+  std::vector<RowContext> m_data;
   std::string m_path;
-  std::string m_delimiter;
+  char m_delimiter;
 
  private:
   // somethigng to extract vals from fields.
-  std::vector<std::string> parse_line(const std::string& l);
+  RowContext parse_line(const std::string& l);
 
   // Removes surrounding quotes from a string
   static std::string remove_quotes(const std::string& str) {
