@@ -3,7 +3,7 @@
 //
 #pragma once
 
-#import "DBManager.h"
+#include "DBManager.h"
 
 namespace wrx_checker {
 
